@@ -1,4 +1,4 @@
-package com.example.onlineshopapi.repository;
+package com.example.onlineshopapi.repository.abst;
 
 import com.example.onlineshopapi.models.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
