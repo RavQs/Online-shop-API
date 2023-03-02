@@ -1,28 +1,46 @@
 package com.example.onlineshopapi.controllers;
 
 
+import com.example.onlineshopapi.exception.ValidationException;
 import com.example.onlineshopapi.models.dto.UserDto;
 import com.example.onlineshopapi.service.abst.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import lombok.AllArgsConstructor;
+import lombok.extern.java.Log;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/users")
+@Log
+@AllArgsConstructor
 public class UserController {
 //TODO Добавить методы с работой над юзерами
 
     private final UserService userService;
 
-    @Autowired
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
-
-
+    @GetMapping("/findAll")
     public List<UserDto> getAllUsers() {
         return userService.findAll();
+    }
+
+    @GetMapping("/findByLogin")
+    public UserDto getUserByLogin(@RequestParam  String login) {
+        return userService.findByLogin(login);
+    }
+
+    @PostMapping("/save")
+    public UserDto saveUser(@RequestBody UserDto userDto) throws ValidationException {
+        log.info("Handling save user: " + userDto);
+
+        return userService.saveUser(userDto);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Void> deleteUsers(@PathVariable Integer id) {
+        log.info("Handling delete user request: " + id);
+        userService.deleteUser(id);
+        return ResponseEntity.ok().build();
     }
 }
