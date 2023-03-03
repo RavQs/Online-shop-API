@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:8081/")
 @RequestMapping("/api/users")
 @Log
 @AllArgsConstructor
 public class UserController {
-//TODO Добавить методы с работой над юзерами
 
     private final UserService userService;
 
