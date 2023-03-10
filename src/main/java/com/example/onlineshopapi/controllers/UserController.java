@@ -30,6 +30,11 @@ public class UserController {
         return userService.findByLogin(login);
     }
 
+    @GetMapping("/findByName")
+    public UserDto getUserByName(@RequestParam String name) {
+        return userService.findByName(name);
+    }
+
     @PostMapping("/save")
     public UserDto saveUser(@RequestBody UserDto userDto) throws ValidationException {
         log.info("Handling save user: " + userDto);

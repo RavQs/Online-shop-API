@@ -44,6 +44,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public UserDto findByName(String name) {
+        User user = userRepository.findByName(name);
+        if(!isNull(user)) {
+            return userConverter.fromUserToUserDto(user);
+        }
+        return null;
+    }
+
+    @Override
     public List<UserDto> findAll() {
         return userRepository.findAll()
                 .stream()
