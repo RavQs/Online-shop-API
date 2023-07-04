@@ -18,6 +18,8 @@ import java.util.List;
 @AllArgsConstructor
 public class UserController {
 
+
+    //TODO Добавить пагинацию пользователей
     private final UserService userService;
 
     @GetMapping("/findAll")
